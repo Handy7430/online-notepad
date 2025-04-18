@@ -19,6 +19,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <!-- Google tag (gtag.js) -->
+        <head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DVT5NLPPWF"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DVT5NLPPWF');
+</script>
+</head>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
