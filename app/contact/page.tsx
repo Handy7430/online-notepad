@@ -84,7 +84,7 @@ export default function Contact() {
                     href="mailto:info@onlinenotepad.cc"
                     className="text-yellow-600 dark:text-yellow-400 hover:underline"
                   >
-                    info@onlinenotepad.com
+                    info@onlinenotepad.cc
                   </a>
                 </p>
                 <p className="mt-2 text-yellow-900 dark:text-yellow-100">
@@ -94,7 +94,7 @@ export default function Contact() {
                     href="mailto:support@onlinenotepad.cc"
                     className="text-yellow-600 dark:text-yellow-400 hover:underline"
                   >
-                    support@onlinenotepad.com
+                    support@onlinenotepad.cc
                   </a>
                 </p>
               </div>
