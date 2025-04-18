@@ -19,8 +19,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <!-- Google tag (gtag.js) -->
-        <head>
+      <head>
+        <!-- Google tag (gtag.js) -->
+        
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-DVT5NLPPWF"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
