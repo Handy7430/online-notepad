@@ -191,11 +191,14 @@ export default function Notepad() {
   className="flex-1 p-4 overflow-auto focus:outline-none font-mono bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-100"
   contentEditable
   dir="ltr"
-  style={{ unicodeBidi: "plaintext" }}
-  dangerouslySetInnerHTML={{ __html: activeNote?.content || "" }}
+  style={{ direction: "ltr", unicodeBidi: "plaintext", whiteSpace: "pre-wrap", wordBreak: "break-word" }}
   onInput={handleContentChange}
   onBlur={handleContentChange}
-/>
+  suppressContentEditableWarning={true}
+>
+  {activeNote?.content || ""}
+</div>
+
 
 
       <div className="flex justify-between items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-900 text-xs text-yellow-700 dark:text-yellow-300 border-t border-yellow-300 dark:border-yellow-800">
