@@ -81,7 +81,7 @@ export default function Contact() {
                   For general inquiries:
                   <br />
                   <a
-                    href="mailto:info@onlinenotepad.com"
+                    href="mailto:info@onlinenotepad.cc"
                     className="text-yellow-600 dark:text-yellow-400 hover:underline"
                   >
                     info@onlinenotepad.com
@@ -91,7 +91,7 @@ export default function Contact() {
                   For support:
                   <br />
                   <a
-                    href="mailto:support@onlinenotepad.com"
+                    href="mailto:support@onlinenotepad.cc"
                     className="text-yellow-600 dark:text-yellow-400 hover:underline"
                   >
                     support@onlinenotepad.com
