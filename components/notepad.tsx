@@ -190,12 +190,10 @@ export default function Notepad() {
   ref={editorRef}
   className="flex-1 p-4 overflow-auto focus:outline-none font-mono bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-100"
   contentEditable
-  dir="ltr"
-  style={{ direction: "ltr", unicodeBidi: "plaintext", whiteSpace: "pre-wrap", wordBreak: "break-word" }}
   onInput={handleContentChange}
   onBlur={handleContentChange}
   suppressContentEditableWarning={true}
->
+/>
   {activeNote?.content || ""}
 </div>
 
