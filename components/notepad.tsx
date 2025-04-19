@@ -26,7 +26,6 @@ export default function Notepad() {
     if (savedNotes) {
       setNotes(JSON.parse(savedNotes))
     } else {
-      // Create a default note if none exist
       const defaultNote = { id: uuidv4(), title: "New Note", content: "" }
       setNotes([defaultNote])
       setActiveNoteId(defaultNote.id)
@@ -55,6 +54,13 @@ export default function Notepad() {
   // Get the active note
   const activeNote = notes.find((note) => note.id === activeNoteId) || notes[0]
 
+  // Load note content into editor when activeNoteId changes
+  useEffect(() => {
+    if (editorRef.current && activeNote) {
+      editorRef.current.innerHTML = activeNote.content || ""
+    }
+  }, [activeNoteId])
+
   // Create a new note
   const handleCreateNote = () => {
     const newNote = {
@@ -68,15 +74,9 @@ export default function Notepad() {
 
   // Delete a note
   const handleDeleteNote = (id: string) => {
-    if (notes.length <= 1) {
-      // Don't delete the last note
-      return
-    }
-
+    if (notes.length <= 1) return
     const newNotes = notes.filter((note) => note.id !== id)
     setNotes(newNotes)
-
-    // If we're deleting the active note, switch to another one
     if (id === activeNoteId) {
       setActiveNoteId(newNotes[0].id)
     }
@@ -90,7 +90,6 @@ export default function Notepad() {
   // Update note content
   const handleContentChange = () => {
     if (!editorRef.current) return
-
     const content = editorRef.current.innerHTML
     setNotes(notes.map((note) => (note.id === activeNoteId ? { ...note, content } : note)))
   }
@@ -104,7 +103,6 @@ export default function Notepad() {
   // Export note
   const handleExport = () => {
     if (!activeNote) return
-
     const element = document.createElement("a")
     const file = new Blob([activeNote.content.replace(/<[^>]*>/g, " ")], { type: "text/plain" })
     element.href = URL.createObjectURL(file)
@@ -117,16 +115,13 @@ export default function Notepad() {
   // Search in note
   const handleSearch = (term: string) => {
     if (!term || !editorRef.current) return
-
     const text = editorRef.current.textContent || ""
     const index = text.toLowerCase().indexOf(term.toLowerCase())
 
     if (index >= 0) {
-      // Create a range and selection
       const range = document.createRange()
       const selection = window.getSelection()
 
-      // Find the text node that contains the search term
       let currentNode = editorRef.current.firstChild
       let currentIndex = 0
 
@@ -134,7 +129,6 @@ export default function Notepad() {
         if (currentNode.nodeType === Node.TEXT_NODE) {
           const nodeText = currentNode.textContent || ""
           if (currentIndex + nodeText.length > index) {
-            // This node contains our search term
             const offset = index - currentIndex
             range.setStart(currentNode, offset)
             range.setEnd(currentNode, offset + term.length)
@@ -144,11 +138,9 @@ export default function Notepad() {
           }
           currentIndex += nodeText.length
         } else if (currentNode.nodeType === Node.ELEMENT_NODE) {
-          // For element nodes, add their text content length
           currentIndex += (currentNode.textContent || "").length
         }
 
-        // Move to next node
         const nextNode = currentNode.firstChild || currentNode.nextSibling
         if (!nextNode) {
           let parentNode = currentNode.parentNode
@@ -187,17 +179,13 @@ export default function Notepad() {
       />
 
       <div
-  ref={editorRef}
-  className="flex-1 p-4 overflow-auto focus:outline-none font-mono bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-100"
-  contentEditable
-  onInput={handleContentChange}
-  onBlur={handleContentChange}
-  suppressContentEditableWarning={true}
-/>
-  {activeNote?.content || ""}
-</div>
-
-
+        ref={editorRef}
+        className="flex-1 p-4 overflow-auto focus:outline-none font-mono bg-yellow-50 dark:bg-yellow-950 text-yellow-900 dark:text-yellow-100"
+        contentEditable
+        onInput={handleContentChange}
+        onBlur={handleContentChange}
+        suppressContentEditableWarning={true}
+      />
 
       <div className="flex justify-between items-center px-4 py-2 bg-yellow-100 dark:bg-yellow-900 text-xs text-yellow-700 dark:text-yellow-300 border-t border-yellow-300 dark:border-yellow-800">
         <div>Auto-saving...</div>
